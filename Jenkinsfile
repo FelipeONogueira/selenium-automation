@@ -3,12 +3,14 @@ pipeline {
 
     stages {
         stage("Build") {
-            // sh "mvn -version"
-            // sh "mvn clean install"
-            sh '''git --version
-            mvn --version
-            java -version
-            '''
+            steps {
+                // sh "mvn -version"
+                // sh "mvn clean install"
+                sh '''git --version
+                mvn --version
+                java -version
+                '''
+            }
         }
     }
 
