@@ -6,11 +6,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 //sh "mvn sonar:sonar sonar.projectKey=automated sonar.host.url=http://localhost:9000 sonar.login=2be33c66b453798deadd3ee2ff2c78dc08fc30b4"
-                sh "mvn sonar:sonar"
-                "-Dsonar.projectKey=automated"
-                "-Dsonar.login=admin" 
-                "-Dsonar.password=123456" 
-                "-Dsonar.host.url=http://127.0.0.1:9000" 
+                sh "mvn sonar:sonar -Dsonar.projectKey=automated -Dsonar.login=admin -Dsonar.password=123456 -Dsonar.host.url=http://127.0.0.1:9000" 
                 //"-Dsonar.login=2be33c66b453798deadd3ee2ff2c78dc08fc30b4"
             }
             // def mvn = tool 'Default Maven';
