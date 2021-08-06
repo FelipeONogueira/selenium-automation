@@ -4,13 +4,16 @@ pipeline {
     stages {
         
         stage('SonarQube Analysis') {
-            def mvn = tool 'Default Maven';
-            withSonarQubeEnv() {
-                sh "${mvn}/bin/mvn sonar:sonar"
+            steps {
+                sh "mvn sonar:sonar sonar.projectKey=automated sonar.host.url=http://localhost:9000 sonar.login=2be33c66b453798deadd3ee2ff2c78dc08fc30b4"
             }
+            // def mvn = tool 'Default Maven';
+            // withSonarQubeEnv() {
+            //     sh "${mvn}/bin/mvn sonar:sonar"
+            // }
         }
 
-        stage ("Testing Stage") {
+        stage("Testing Stage") {
             steps {
                 sh "mvn test"
             }
