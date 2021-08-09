@@ -17,16 +17,6 @@ pipeline {
       }
     }
     
-    stage('Build Api') {
-      steps {
-        withMaven(maven: 'apache-maven-3.0.5') {
-          sh 'mvn clean install'
-          //sh 'mvn clean install -DskipTests=true -f ${WORKSPACE}/modules/api/pom.xml'
-        }
-      }
-    }
-
-    
     stage('SonarQube analysis') {
       steps{
         withSonarQubeEnv('sonarqube') {
@@ -36,6 +26,14 @@ pipeline {
       }
     }
 
+    stage('Build Api') {
+      steps {
+        withMaven(maven: 'apache-maven-3.0.5') {
+          sh 'mvn clean install'
+          //sh 'mvn clean install -DskipTests=true -f ${WORKSPACE}/modules/api/pom.xml'
+        }
+      }
+    }
     // stage("Quality Gate"){
     //   steps{
     //     timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
