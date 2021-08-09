@@ -17,6 +17,16 @@ pipeline {
       }
     }
     
+    stage('Build Api') {
+      steps {
+        withMaven(maven: 'apache-maven-3.0.5') {
+          sh 'mvn clean install'
+          //sh 'mvn clean install -DskipTests=true -f ${WORKSPACE}/modules/api/pom.xml'
+        }
+      }
+    }
+
+    
     stage('SonarQube analysis') {
       steps{
         withSonarQubeEnv('sonarqube') {
@@ -37,13 +47,5 @@ pipeline {
     //   }
     // }
 
-    stage('Build Api') {
-      steps {
-        withMaven(maven: 'apache-maven-3.0.5') {
-          sh 'mvn clean install -DskipTests=true'
-          //sh 'mvn clean install -DskipTests=true -f ${WORKSPACE}/modules/api/pom.xml'
-        }
-      }
-    }
   }
 }
